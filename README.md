@@ -1,3 +1,9 @@
+# Сравнение библиотек для работы с JSON. 
+* [easyjson](https://pkg.go.dev/github.com/mailru/easyjson)
+* [json-iterator](https://pkg.go.dev/github.com/json-iterator/go)
+* [encoding/json](https://pkg.go.dev/encoding/json)
+* [bytedance/sonic](https://pkg.go.dev/github.com/bytedance/sonic)
+
 # Бенчмарки
 
 ## Сложные большие структуры
