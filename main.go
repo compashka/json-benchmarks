@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	mode := flag.String("mode", "all", "what to run: benchmark | generator | result | all")
+	mode := flag.String("mode", "all", "what to run: benchmark | result | all")
 	flag.Parse()
 
 	switch *mode {
