@@ -1,13 +1,23 @@
-# Сравнение библиотек для работы с JSON. 
+# JSON Libraries Comparison
 * [easyjson](https://pkg.go.dev/github.com/mailru/easyjson)
 * [json-iterator](https://pkg.go.dev/github.com/json-iterator/go)
 * [encoding/json](https://pkg.go.dev/encoding/json)
 * [bytedance/sonic](https://pkg.go.dev/github.com/bytedance/sonic)
 
-# Бенчмарки
+# Benchmarks
 
-## Сложные большие структуры
+Benchmarks were run across various datasets:
 
+- **CanadaGeometry** is a GeoJSON (RFC 7946) representation of Canada. It contains many JSON arrays of arrays of two-element arrays of numbers.
+- **CITMCatalog** contains many JSON objects using numeric names.
+- **SyntheaFHIR** is sample JSON data from the healthcare industry. It contains many nested JSON objects with mostly string values, where the set of unique string values is relatively small.
+- **TwitterStatus** is the JSON response from the Twitter API. It contains a mix of all different JSON kinds, where string values are a mix of both single-byte ASCII and multi-byte Unicode.
+- **GolangSource** is a simple tree representing the Go source code. It contains many nested JSON objects, each with the same schema.
+- **StringUnicode** contains many strings with multi-byte Unicode runes.
+
+## Complex Large Structures
+
+<!-- benchmarks start -->
 ```mermaid
 gantt
 title Marshal - canada_geometry (MB/s - higher is better)
@@ -15,13 +25,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12       
-376 :0, 376
+153:0,153
 section encoding/json-12         
-295 :0, 295
+133:0,133
 section json-iterator/go-12      
-329 :0, 329
+175:0,175
 section mailru/easyjson-12       
-330 :0, 330
+188:0,188
 ```
 
 ```mermaid
@@ -31,13 +41,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12          
-1485 :0, 1485
+993:0,993
 section encoding/json-12            
-2894 :0, 2894
+605:0,605
 section json-iterator/go-12         
-2977 :0, 2977
+1540:0,1540
 section mailru/easyjson-12          
-4598 :0, 4598
+1872:0,1872
 ```
 
 ```mermaid
@@ -47,13 +57,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12         
-472 :0, 472
+299:0,299
 section encoding/json-12           
-736 :0, 736
+180:0,180
 section json-iterator/go-12        
-731 :0, 731
+419:0,419
 section mailru/easyjson-12         
-987 :0, 987
+474:0,474
 ```
 
 ```mermaid
@@ -63,13 +73,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12        
-4626 :0, 4626
+417:0,417
 section encoding/json-12          
-871 :0, 871
+205:0,205
 section json-iterator/go-12       
-920 :0, 920
+452:0,452
 section mailru/easyjson-12        
-1012 :0, 1012
+527:0,527
 ```
 
 ```mermaid
@@ -79,13 +89,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12          
-341 :0, 341
+207:0,207
 section encoding/json-12            
-332 :0, 332
+71:0,71
 section json-iterator/go-12         
-454 :0, 454
+313:0,313
 section mailru/easyjson-12          
-848 :0, 848
+358:0,358
 ```
 
 ```mermaid
@@ -95,13 +105,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12        
-1316 :0, 1316
+472:0,472
 section encoding/json-12          
-1391 :0, 1391
+215:0,215
 section json-iterator/go-12       
-1134 :0, 1134
+628:0,628
 section mailru/easyjson-12        
-1827 :0, 1827
+787:0,787
 ```
 
 ```mermaid
@@ -111,13 +121,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12     
-661 :0, 661
+129:0,129
 section encoding/json-12       
-124 :0, 124
+118:0,118
 section json-iterator/go-12    
-161 :0, 161
+111:0,111
 section mailru/easyjson-12     
-284 :0, 284
+152:0,152
 ```
 
 ```mermaid
@@ -127,13 +137,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12        
-1648 :0, 1648
+304:0,304
 section encoding/json-12          
-201 :0, 201
+265:0,265
 section json-iterator/go-12       
-736 :0, 736
+228:0,228
 section mailru/easyjson-12        
-733 :0, 733
+383:0,383
 ```
 
 ```mermaid
@@ -143,13 +153,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12       
-774 :0, 774
+168:0,168
 section encoding/json-12         
-140 :0, 140
+143:0,143
 section json-iterator/go-12      
-421 :0, 421
+110:0,110
 section mailru/easyjson-12       
-393 :0, 393
+209:0,209
 ```
 
 ```mermaid
@@ -159,13 +169,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12      
-3319 :0, 3319
+968:0,968
 section encoding/json-12        
-283 :0, 283
+357:0,357
 section json-iterator/go-12     
-1072 :0, 1072
+456:0,456
 section mailru/easyjson-12      
-4021 :0, 4021
+1582:0,1582
 ```
 
 ```mermaid
@@ -175,13 +185,13 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12        
-896 :0, 896
+242:0,242
 section encoding/json-12          
-182 :0, 182
+212:0,212
 section json-iterator/go-12       
-580 :0, 580
+189:0,189
 section mailru/easyjson-12        
-622 :0, 622
+301:0,301
 ```
 
 ```mermaid
@@ -191,20 +201,45 @@ dateFormat X
 axisFormat %s
 
 section bytedance/sonic-12      
-933 :0, 933
+305:0,305
 section encoding/json-12        
-193 :0, 193
+231:0,231
 section json-iterator/go-12     
-546 :0, 546
+190:0,190
 section mailru/easyjson-12      
-827 :0, 827
+414:0,414
 ```
 
-## Простые структуры
-![marshall_nested](plots/marshall_nested.png)
+<!-- benchmarks end -->
 
-![unmarshall_nested](plots/unmarshall_nested.png)
+# Simple Structures
 
-![marshall_number](plots/marshall_number.png)
+* number_structure_ – number of fields per object
 
-![unmarshall_number](plots/unmarshall_number.png)
+* nested_structure_ – inheritance / nested objects
+
+We also generate graphs that show performance depending on number of fields and depth of nesting:
+
+![marshall_nested](result/marshal_nested.png)
+
+![unmarshall_nested](result/unmarshal_nested.png)
+
+![marshall_number](result/marshal_number.png)
+
+![unmarshall_number](result/unmarshal_number.png)
+
+# How to Run
+
+This project supports several run modes using the -mode flag:
+
+`go run main.go -mode=<mode>`
+
+Available modes:
+
+* benchmark – run all Go benchmarks and store results in result/result.txt.
+
+* result – generate plots and update the benchmarks section in README.md from the benchmark results.
+
+* all – run both benchmarks and generate plots/README updates in one step.
+
+* default is all.

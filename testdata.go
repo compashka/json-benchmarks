@@ -1,14 +1,12 @@
-package test
+package main
 
 import (
-	"bytes"
-	"compress/gzip"
-	"io"
-	"os"
 	"time"
 
 	"github.com/go-json-experiment/json/jsontext"
 )
+
+//go:generate easyjson  -all
 
 type (
 	canadaRoot struct {
@@ -511,28 +509,6 @@ type (
 		Indices     []int        `json:"indices"`
 	}
 )
-
-func gunzip(name string) []byte {
-	fl, err := os.Open(name)
-	if err != nil {
-		panic(err)
-	}
-	defer fl.Close()
-
-	gz, err := gzip.NewReader(fl)
-	if err != nil {
-		panic(err)
-	}
-	defer gz.Close()
-
-	var buf bytes.Buffer
-	_, err = io.Copy(&buf, gz)
-	if err != nil {
-		panic(err)
-	}
-
-	return buf.Bytes()
-}
 
 type NestedStructure struct {
 	ID       int               `json:"id"`
